@@ -1,1 +1,3 @@
-This is a starter template for [Learn Next.js](https://nextjs.org/learn).
+# teenage dao
+
+A website to get the world hyped about building a hardware wallet together.
