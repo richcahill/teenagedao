@@ -6,7 +6,7 @@ export default function Home() {
     <>
       <div className='h-screen bg-zinc-100'>
         <Head>
-          <title>Create Next App</title>
+          <title>teenage dao</title>
           <link rel='icon' href='/favicon.ico' />
         </Head>
   
