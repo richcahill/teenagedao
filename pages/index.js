@@ -7,7 +7,7 @@ export default function Home() {
       <div className='h-screen bg-zinc-100'>
         <Head>
           <title>teenage dao</title>
-          <link rel='icon' href='/favicon.ico' />
+          <link rel='icon' href='/favicon.png' />
         </Head>
   
         <main className='relative header flex flex-col justify-between'>
