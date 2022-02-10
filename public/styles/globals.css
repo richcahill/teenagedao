@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: 'Helvetica', -apple-system, BlinkMacSystemFont, avenir next,
+    avenir, helvetica neue, helvetica, Ubuntu, roboto, noto, segoe ui, arial,
+    sans-serif;
+}
+
+body {
+  padding: 0
+}
