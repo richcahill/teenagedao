@@ -3,6 +3,10 @@ import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import How from "../components/How";
 import LFB from "../components/LFB";
+import Why from "../components/Why";
+import WhatIf from "../components/WhatIf";
+import CallToAction from "../components/CallToAction";
+import Footer from "../components/Footer";
 
 export default function Home() {
 
@@ -25,6 +29,7 @@ export default function Home() {
         </Head>
   
         {/* hero section */}
+
         <section className='relative header flex flex-col justify-between'>
           <div className="header absolute top-0 left-0 w-full bg-blue-500 h-full">
             <Image src="/img/wallet-render.png" layout="fill" quality={90} objectFit="cover"/>
@@ -51,78 +56,12 @@ export default function Home() {
             <p className="text-8xl tracking-tight max-w-4xl">finally, a beautiful hardware wallet{question?"?":""}</p>
           </div>
         </section>
-        {/* call to action section */}
-        <section className="bg-te-orange pt-10 pb-16">
-          <div className="container mx-auto text-center"><h2 className="text-xl text-white uppercase tracking-wide">great products should exist</h2>
-          <p className=" max-w-xl mx-auto text-xl font-light lowercase mt-4">
-            web3 is exploding. NFTs, DeFi, DAOs. <br />
-            a global hivemind of curious people builds together, 24/7. <br />
-            However, the hardware wallets we use daily has been stuck in the past. The best we got so far are <a className=" border-b border-black" href="https://www.inputmag.com/design/fendi-ledger-nano-x-crypto-wallet-price-june-2022-release" target="_blank">Fendi bags for our Ledgers</a>.
-            <br /><br />
-            We can do better. <br /><br />
-            We believe in beauty. We believe in craft. <br />
-            We believe in better technology for everyday.
-            <br /><br />
-            It's time for a designed driven approach, <br />
-            in line with the needs for security and reliability.</p>
-          </div>
-        </section>
-        {/* products section */}
-        {/* could be cool to do some kind of physics based products raining thing */}
-        <section className="pb-16">
-          <div className="container mx-auto relative ">
-            <div className="relative "><img src="/img/te-products.png" alt="teenage engineering products" /></div>
-            <div className="mt-6 uppercase text-xl  text-center tracking-wide ">what if...</div>
-            <div className="text-center text-8xl lowercase font-light tracking-tight mt-6">we build it together.</div>
-            <div className="text-center text-lg lowercase font-light tracking-tight mt-12">yes — with you, <a href="https://teenage.engineering" target="_blank" className=" border-b border-black">teenage engineering</a>.<br />let's do it.</div>
-            {/* collaborators */}
-            {/* todo, more collaborators */}
-            <div className="flex justify-center space-x-16 items-center h-20 mt-8">
-            <img src="/img/collaborators/colab.png" alt="colab" className="h-16"/>
-            <img src="/img/collaborators/we3.png" alt="colab" className="h-8"/>
-            <img src="/img/collaborators/delphi.png" alt="colab" className="h-14"/>
-
-            </div>
-          </div>
-        </section>
-
-        {/* why section */}
-
-        <section className=" relative">
-          <div className="absolute w-1/2 left-0 h-full bg-te-blue"></div>
-          <div className="absolute w-1/2 right-0 h-full bg-te-red"></div>
-          <div className="container mx-auto relative z-10 flex text-white font-light">
-            <div className=" bg-te-blue flex-1 flex justify-center p-16">
-              <div className="max-w-md">           
-                <div className="uppercase text-xl tracking-wide mb-4">Why Teenage Engineering?</div>
-                <div className=" leading-tight lowercase">
-                  You have tons of experience designing wonderful hardware products that people love. <br />
-                  We love them, indeed.
-                </div>
-              </div>
-            </div>
-            <div className=" bg-te-red flex-1 flex justify-center p-16">
-            <div className="max-w-md">           
-                <div className="uppercase text-xl tracking-wide mb-4">Why The rest of us?</div>
-                <div className=" leading-tight lowercase">
-                The people signed below know Web3 in and out. This is our enthusiastic moonshot to build a community that wants to meme this collaboration into existence. <br/>Consider this a love letter from us.
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* how section */}
+        <CallToAction />
+        <WhatIf />
+        <Why />
         <How />
-
-        <LFB></LFB>
-
-        {/* footer  */}
-        <section className="mt-20 bg-te-black">
-          <div className="container mx-auto py-8 px-4 text-white font-light">
-            footer
-          </div>
-        </section>
+        <LFB />
+        <Footer />
         
       </div>
       <style jsx>{`
