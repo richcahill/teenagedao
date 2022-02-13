@@ -1,9 +1,13 @@
+import { useEffect, useState } from 'react';
+
 export default function Nav(props) {
   return (
-    <div className=' fixed top-0 z-30 w-screen '>
-      <nav className='container mx-auto flex text-white justify-between py-4 '>
-        <h1 className=' text-3xl font-light tracking-tight mx leading-8 text-white'>
-          <p className=' opacity-70'>teenage</p>
+    <div className=' fixed top-0 z-30 w-screen'>
+      <div className=" absolute w-full h-full backdrop-blur-lg"> 
+      </div>
+      <nav className='container mx-auto flex text-white justify-between py-4'>
+        <h1 className='text-3xl font-light tracking-tight mx leading-8 text-white'>
+          <p className='opacity-70'>teenage</p>
           <p className='opacity-100 relative z-20'>dao</p>
         </h1>
         <div className='flex'>
