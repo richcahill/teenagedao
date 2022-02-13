@@ -67,12 +67,12 @@ export default function Home() {
         </section>
         {/* products section */}
         {/* could be cool to do some kind of physics based products raining thing */}
-        <section className="">
+        <section className="pb-16">
           <div className="container mx-auto relative ">
             <div class="relative "><img src="/img/te-products.png" alt="teenage engineering products" /></div>
             <div className="mt-6 uppercase text-xl  text-center tracking-wide ">what if...</div>
             <div className="text-center text-8xl lowercase font-light tracking-tight mt-6">we build it together.</div>
-            <div className="text-center text-lg lowercase font-light tracking-tight mt-12">yes — with you, <span className=" border-b border-black">teenage engineering</span>.<br />let's do it.</div>
+            <div className="text-center text-lg lowercase font-light tracking-tight mt-12">yes — with you, <a href="https://teenage.engineering" target="_blank" className=" border-b border-black">teenage engineering</a>.<br />let's do it.</div>
             {/* collaborators */}
             {/* todo, more collaborators */}
             <div className="flex justify-center space-x-16 items-center h-20 mt-8">
@@ -84,8 +84,31 @@ export default function Home() {
           </div>
         </section>
 
-        {/* footer  */}
+        <section className=" bg-te-blue relative">
+        <div className="absolute w-1/2 left-0 h-full bg-te-blue"></div>
+        <div className="absolute w-1/2 right-0 h-full bg-te-red"></div>
+          <div className="container mx-auto relative z-10 flex text-white font-light">
+            <div className=" bg-te-blue flex-1 flex justify-center p-12">
+              <div className="max-w-md">           
+                <div className="uppercase text-xl tracking-wide mb-4">Why Teenage Engineering?</div>
+                <div className=" leading-tight lowercase">
+                  You have tons of experience designing wonderful hardware products that people love. <br />
+                  We love them, indeed.
+                </div>
+              </div>
+            </div>
+            <div className=" bg-te-red flex-1 flex justify-center p-12">
+            <div className="max-w-md">           
+                <div className="uppercase text-xl tracking-wide mb-4">Why The rest of us?</div>
+                <div className=" leading-tight lowercase">
+                The people signed below know Web3 in and out. This is our enthusiastic moonshot to build a community that wants to meme this collaboration into existence. Consider this a love letter from us.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
+        {/* footer  */}
         <section className="mt-20 bg-te-black">
           <div className="container mx-auto py-8 px-4 text-white font-light">
             footer
