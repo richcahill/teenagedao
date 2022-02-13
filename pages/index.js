@@ -5,10 +5,9 @@ import React, { useState, useEffect } from 'react';
 export default function Home() {
 
   useEffect(() => {
-
     const intervalId = setInterval(() => {
       setQuestion(!question)
-    }, 800);
+    }, 2000);
 
     return () => clearInterval(intervalId);
   },);
@@ -19,7 +18,7 @@ export default function Home() {
     <>
       <div className='h-screen bg-zinc-100'>
         <Head>
-          <title>teenage dao</title>
+          <title>teenage dao {question?"?":""}</title>
           <link rel='icon' href='/favicon.png' />
         </Head>
   
