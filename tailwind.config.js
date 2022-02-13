@@ -10,6 +10,7 @@ module.exports = {
         'te-blue': '#0087e6',
         'te-red': '#ff5f00',
         'te-black': '#0c0a0e',
+        'te-grey': '#ececec',
       },
     },
   },
