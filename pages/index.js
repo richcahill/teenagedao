@@ -16,13 +16,13 @@ export default function Home() {
 
   return (
     <>
-      <div className='h-screen bg-zinc-100'>
+      <div className='h-screen bg-zinc-100 overflow-y-scroll'>
         <Head>
           <title>teenage dao {question?"?":""}</title>
           <link rel='icon' href='/favicon.png' />
         </Head>
   
-        <main className='relative header flex flex-col justify-between'>
+        <section className='relative header flex flex-col justify-between'>
           <div className="header absolute top-0 left-0 w-full bg-blue-500 h-full">
             <Image src="/img/wallet-render.png" layout="fill" quality={90} objectFit="cover"/>
           </div>
@@ -47,7 +47,23 @@ export default function Home() {
             <p className="uppercase text-xl mb-4">imagine</p>
             <p className="text-8xl tracking-tight max-w-4xl">finally, a beautiful hardware wallet{question?"?":""}</p>
           </div>
-        </main>
+        </section>
+        <section className="bg-te-orange pt-10 pb-16">
+          <div className="container mx-auto text-center"><h2 className="text-xl text-white uppercase tracking-wide">great products should exist</h2>
+          <p className=" max-w-xl mx-auto text-xl font-light lowercase mt-4">
+            web3 is exploding. NFTs, DeFi, DAOs. <br />
+            a global hivemind of curious people builds together, 24/7. <br />
+            However, the hardware wallets we use daily has been stuck in the past. The best we got so far are <a className=" border-b border-black" href="https://www.inputmag.com/design/fendi-ledger-nano-x-crypto-wallet-price-june-2022-release" target="_blank">Fendi bags for our Ledgers</a>.
+            <br /><br />
+            We can do better. <br /><br />
+
+We believe in beauty. We believe in craft. <br />
+We believe in better technology for everyday.
+<br /><br />
+It’s time for a designed driven approach, <br />
+in line with the needs for security and reliability.</p>
+          </div>
+        </section>
         
       </div>
       <style jsx>{`
