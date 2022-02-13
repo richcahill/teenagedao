@@ -26,11 +26,13 @@ function Signature(props) {
   return (
     <div className=' border-te-blue border-b text-te-blue'>
       <div className='mx-auto container p-4 md:py-8 flex justify-between items-center'>
-        <div className='flex items-center flex-1'>
-          <img
-            src='https://i.pravatar.cc/100'
-            className='h-12 rounded-full outline-2 outline outline-te-blue'
-          />
+        <div className='flex items-center flex-1 '>
+          <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue'>
+            <img
+              src='https://i.pravatar.cc/100'
+              className=' rounded-full'
+            />
+          </div>
           <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
         </div>
         <div className='flex-1 flex justify-center items-center space-x-8 opacity-40 text-sm'>
