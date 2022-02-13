@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import HowCard from "../components/HowCard";
 
 export default function Home() {
 
@@ -69,7 +70,7 @@ export default function Home() {
         {/* could be cool to do some kind of physics based products raining thing */}
         <section className="pb-16">
           <div className="container mx-auto relative ">
-            <div class="relative "><img src="/img/te-products.png" alt="teenage engineering products" /></div>
+            <div className="relative "><img src="/img/te-products.png" alt="teenage engineering products" /></div>
             <div className="mt-6 uppercase text-xl  text-center tracking-wide ">what if...</div>
             <div className="text-center text-8xl lowercase font-light tracking-tight mt-6">we build it together.</div>
             <div className="text-center text-lg lowercase font-light tracking-tight mt-12">yes — with you, <a href="https://teenage.engineering" target="_blank" className=" border-b border-black">teenage engineering</a>.<br />let's do it.</div>
@@ -84,11 +85,13 @@ export default function Home() {
           </div>
         </section>
 
-        <section className=" bg-te-blue relative">
-        <div className="absolute w-1/2 left-0 h-full bg-te-blue"></div>
-        <div className="absolute w-1/2 right-0 h-full bg-te-red"></div>
+        {/* why section */}
+
+        <section className="  relative">
+          <div className="absolute w-1/2 left-0 h-full bg-te-blue"></div>
+          <div className="absolute w-1/2 right-0 h-full bg-te-red"></div>
           <div className="container mx-auto relative z-10 flex text-white font-light">
-            <div className=" bg-te-blue flex-1 flex justify-center p-12">
+            <div className=" bg-te-blue flex-1 flex justify-center p-16">
               <div className="max-w-md">           
                 <div className="uppercase text-xl tracking-wide mb-4">Why Teenage Engineering?</div>
                 <div className=" leading-tight lowercase">
@@ -97,14 +100,23 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className=" bg-te-red flex-1 flex justify-center p-12">
+            <div className=" bg-te-red flex-1 flex justify-center p-16">
             <div className="max-w-md">           
                 <div className="uppercase text-xl tracking-wide mb-4">Why The rest of us?</div>
                 <div className=" leading-tight lowercase">
-                The people signed below know Web3 in and out. This is our enthusiastic moonshot to build a community that wants to meme this collaboration into existence. Consider this a love letter from us.
+                The people signed below know Web3 in and out. This is our enthusiastic moonshot to build a community that wants to meme this collaboration into existence. <br/>Consider this a love letter from us.
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* how section */}
+        <section>
+          <div className="container mx-auto flex justify-center space-x-6 pt-16 pb-12">
+          <HowCard step={1}/>
+          <HowCard step={2}/>
+          <HowCard step={3}/>
           </div>
         </section>
 
