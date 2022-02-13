@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import How from "../components/How";
+import LFB from "../components/LFB";
 
 export default function Home() {
 
@@ -87,7 +88,7 @@ export default function Home() {
 
         {/* why section */}
 
-        <section className="  relative">
+        <section className=" relative">
           <div className="absolute w-1/2 left-0 h-full bg-te-blue"></div>
           <div className="absolute w-1/2 right-0 h-full bg-te-red"></div>
           <div className="container mx-auto relative z-10 flex text-white font-light">
@@ -113,6 +114,8 @@ export default function Home() {
 
         {/* how section */}
         <How />
+
+        <LFB></LFB>
 
         {/* footer  */}
         <section className="mt-20 bg-te-black">
