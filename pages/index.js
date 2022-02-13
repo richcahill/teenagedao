@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import HowCard from "../components/HowCard";
+import How from "../components/How";
 
 export default function Home() {
 
@@ -112,13 +112,7 @@ export default function Home() {
         </section>
 
         {/* how section */}
-        <section>
-          <div className="container mx-auto flex justify-center space-x-6 pt-16 pb-12">
-          <HowCard step={1}/>
-          <HowCard step={2}/>
-          <HowCard step={3}/>
-          </div>
-        </section>
+        <How />
 
         {/* footer  */}
         <section className="mt-20 bg-te-black">
