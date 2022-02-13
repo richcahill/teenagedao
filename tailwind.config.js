@@ -7,6 +7,9 @@ module.exports = {
     extend: {
       colors: {
         'te-orange': '#ffa700',
+        'te-blue': '#0087e6',
+        'te-red': '#ff5f00',
+        'te-black': '#0c0a0e',
       },
     },
   },
