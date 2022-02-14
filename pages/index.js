@@ -11,7 +11,7 @@ import Hero from "../components/Hero";
 export default function Home() {
   return (
       <div className='h-screen bg-zinc-100 overflow-y-scroll'>
-        <Nav/>
+        {/* <Nav/> */}
         <Hero />
         <CallToAction />
         <WhatIf />

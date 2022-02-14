@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
+import Nav from './Nav';
 
 export default function Hero(props) {
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function Hero(props) {
         <link rel='icon' href='/favicon.png' />
       </Head>
       <section className='relative header flex flex-col justify-between'>
+        <Nav></Nav>
         <div className='header absolute top-0 left-0 w-full bg-blue-500 h-full'>
           <Image
             src='/img/wallet-render.png'
