@@ -27,6 +27,8 @@ let dummySignatures = [
 ];
 
 function Signature(props) {
+  console.log(props);
+
   return (
     <div className=' border-te-blue border-b text-te-blue'>
       <div className='mx-auto container p-4 md:py-8 flex justify-between items-center'>
@@ -52,12 +54,15 @@ function Signature(props) {
 }
 
 export default function Sign() {
-  const [value, loading, error] = useCollection(collection(db, 'signatures'), {
-    snapshotListenOptions: { includeMetadataChanges: true },
-  });
+  const [signatures, loading, error] = useCollection(
+    collection(db, 'signatures'),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    }
+  );
 
-  if (!loading && value) {
-    value.docs.map((doc) => console.log(doc.data()));
+  if (!loading && signatures) {
+    signatures.docs.map((doc) => console.log(doc.data()));
   }
 
   return (
@@ -81,9 +86,16 @@ export default function Sign() {
         </div>
       </section>
       <section className='bg-te-grey py-16'>
-        {dummySignatures.map((signature, i) => {
-          return <Signature {...signature} key={i} />;
-        })}
+        {error && <strong>Error: {JSON.stringify(error)}</strong>}
+        {loading && <span>loading signatures...</span>}
+        {signatures && (
+          <>
+            {signatures.docs.map((signature, i) => {
+              return <Signature {...signature.data()} key={i} />;
+            })}
+          </>
+        )}
+
         <div className=' flex justify-center mt-8'>
           <button className='uppercase border-b border-te-blue text-te-blue text-sm transition hover:opacity-80 duration-300'>
             show more
