@@ -26,6 +26,11 @@ let dummySignatures = [
   },
 ];
 
+let ellipsify = (str) => {
+  let shortened = str.substring(0, 3) + '...' + str.slice(-2);
+  return shortened;
+};
+
 function Signature(props) {
   console.log(props);
 
@@ -39,7 +44,7 @@ function Signature(props) {
           <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
         </div>
         <div className='flex-1 flex justify-center items-center space-x-8 opacity-40 text-sm'>
-          <div>{props.address}</div>
+          <div>{ellipsify(props.address)}</div>
           <div>{props.signedDate}</div>
         </div>
         <button className='flex-1 flex justify-end '>
@@ -55,7 +60,7 @@ function Signature(props) {
 
 export default function Sign() {
   const [signatures, loading, error] = useCollection(
-    collection(db, 'signatures'),
+    collection(db, 'testSignatures'),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
