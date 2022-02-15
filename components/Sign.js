@@ -1,3 +1,7 @@
+import { db, app } from '../lib/clientApp.js';
+import { getFirestore, collection } from 'firebase/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
+
 let dummySignatures = [
   {
     icon: 'https://i.pravatar.cc/100',
@@ -28,10 +32,7 @@ function Signature(props) {
       <div className='mx-auto container p-4 md:py-8 flex justify-between items-center'>
         <div className='flex items-center flex-1 '>
           <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue'>
-            <img
-              src='https://i.pravatar.cc/100'
-              className=' rounded-full'
-            />
+            <img src='https://i.pravatar.cc/100' className=' rounded-full' />
           </div>
           <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
         </div>
@@ -51,6 +52,14 @@ function Signature(props) {
 }
 
 export default function Sign() {
+  const [value, loading, error] = useCollection(collection(db, 'signatures'), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
+
+  if (!loading && value) {
+    value.docs.map((doc) => console.log(doc.data()));
+  }
+
   return (
     <>
       <section className='pb-16 bg-te-grey py-8 text-te-blue'>
