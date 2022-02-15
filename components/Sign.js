@@ -36,19 +36,18 @@ function Signature(props) {
 
   return (
     <div className=' border-te-blue border-b text-te-blue'>
-      <div className='mx-auto container p-4 md:py-8 flex justify-between items-center'>
-        {/* TODO switch this out for css grid instead of flex */}
+      <div className='mx-auto container p-4 md:py-8 grid grid-cols-3'>
         <div className='flex items-center flex-1 '>
           <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue bg-te-blue'>
             {props.icon && <img src={props.icon} className=' rounded-full' />}
           </div>
           <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
         </div>
-        <div className='flex-1 flex justify-center items-center space-x-8 opacity-40 text-sm'>
+        <div className='flex justify-center items-center space-x-8 opacity-40 text-sm'>
           <div>{ellipsify(props.address)}</div>
           <div>{props.signedDate}</div>
         </div>
-        <button className='flex-1 flex justify-end '>
+        <button className='flex justify-end '>
           <div className='py-2 px-3 pr-4 bg-te-orange text-white text-lg font-light flex rounded-sm space-x-2'>
             <img src='/img/check.svg' />
             <p>@{props.handle}</p>
