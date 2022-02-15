@@ -10,7 +10,7 @@ import Sign from '../components/Sign';
 import { useState } from 'react';
 
 export default function Home() {
-  const [isSigning, setIsSigning] = useState(true);
+  const [isSigning, setIsSigning] = useState(false);
 
   let openClose = () => {
     setIsSigning(!isSigning);

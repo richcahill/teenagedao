@@ -4,7 +4,7 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
 
 export default function Sign(props) {
-  // steps for additional stuff
+  // steps for additional steps that haven't been built yet
   const [step, setIsStep] = useState(1);
 
   return (
