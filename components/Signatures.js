@@ -44,7 +44,7 @@ function Signature(props) {
           <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
         </div>
         <div className='flex justify-center items-center space-x-8 opacity-40 text-sm'>
-          <div>{ellipsify(props.address)}</div>
+          <div>{props.address && ellipsify(props.address)}</div>
           <div>{props.signedDate}</div>
         </div>
         <button className='flex justify-end '>

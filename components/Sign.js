@@ -1,17 +1,28 @@
 import { db, app } from '../lib/clientApp.js';
-import { getFirestore, collection } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
 
 export default function Sign(props) {
   // steps for additional steps that haven't been built yet
   const [step, setIsStep] = useState(1);
+  const [info, setInfo] = useState({ name: '', handle: '' });
+
+  let signLetter = async (e) => {
+    e.preventDefault();
+    console.log(info);
+    const reference = await addDoc(collection(db, 'testSignatures'), info);
+  };
+
+  let updateInfo = (e) => {
+    setInfo({ ...info, [e.target.id]: e.target.value });
+  };
 
   return (
-    <container className='fixed h-full w-full  top-0 left-0 z-40 flex justify-center items-center'>
+    <div className='fixed h-full w-full  top-0 left-0 z-40 flex justify-center items-center'>
       <div className='fixed bg-te-black opacity-90 w-full h-full' />
       <div
-        className='fixed backdrop-blur-xl w-full h-full'
+        className='fixed backdrop-blur-lg w-full h-full'
         onClick={props.close}
       />
 
@@ -26,18 +37,27 @@ export default function Sign(props) {
               <input
                 className='px-5 py-3 border border-te-black w-96 rounded-sm'
                 placeholder='your name or alias '
+                id='name'
+                onChange={updateInfo}
+                value={info.name}
               ></input>
               <input
                 className='mt-2 px-5 py-3 border border-te-black w-96 rounded-sm'
                 placeholder='your twitter username '
+                id='handle'
+                onChange={updateInfo}
+                value={info.handle}
               ></input>
-              <button className='mt-6 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'>
+              <button
+                onClick={signLetter}
+                className='mt-6 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'
+              >
                 sign our love letter
               </button>
             </form>
           </>
         )}
       </div>
-    </container>
+    </div>
   );
 }
