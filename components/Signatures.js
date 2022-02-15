@@ -48,10 +48,12 @@ function Signature(props) {
           <div>{props.signedDate}</div>
         </div>
         <button className='flex justify-end '>
-          <div className='py-2 px-3 pr-4 bg-te-orange text-white text-lg font-light flex rounded-sm space-x-2'>
-            <img src='/img/check.svg' />
-            <p>@{props.handle}</p>
-          </div>
+          {props.handle && (
+            <div className='py-2 px-3 pr-4 bg-te-orange text-white text-lg font-light flex rounded-sm space-x-2'>
+              <img src='/img/check.svg' />
+              <p>@{props.handle}</p>
+            </div>
+          )}
         </button>
       </div>
     </div>
