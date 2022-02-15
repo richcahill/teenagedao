@@ -37,9 +37,10 @@ function Signature(props) {
   return (
     <div className=' border-te-blue border-b text-te-blue'>
       <div className='mx-auto container p-4 md:py-8 flex justify-between items-center'>
+        {/* TODO switch this out for css grid instead of flex */}
         <div className='flex items-center flex-1 '>
-          <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue'>
-            <img src='https://i.pravatar.cc/100' className=' rounded-full' />
+          <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue bg-te-blue'>
+            {props.icon && <img src={props.icon} className=' rounded-full' />}
           </div>
           <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
         </div>
