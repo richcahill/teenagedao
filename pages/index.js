@@ -42,6 +42,8 @@ export default function Home() {
 
     console.log(payload);
     const reference = await addDoc(collection(db, 'testSignatures'), info);
+    
+    setIsSigning(false);
   };
 
   useEffect(() => {
