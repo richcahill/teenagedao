@@ -1,6 +1,3 @@
-import { db, app } from '../lib/clientApp.js';
-import { collection, addDoc } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
 import { useState } from 'react';
 
 export default function Sign(props) {
@@ -10,8 +7,7 @@ export default function Sign(props) {
 
   let signLetter = async (e) => {
     e.preventDefault();
-    console.log(info);
-    const reference = await addDoc(collection(db, 'testSignatures'), info);
+    props.sign(info);
   };
 
   let updateInfo = (e) => {
