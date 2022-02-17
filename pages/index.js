@@ -10,7 +10,7 @@ import Sign from '../components/Sign';
 
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, Timestamp } from 'firebase/firestore';
 import { db, app } from '../lib/clientApp.js';
 
 export default function Home() {
@@ -21,28 +21,31 @@ export default function Home() {
 
   let closeSigningModal = () => {
     setIsSigning(false);
-  }
+  };
 
   let startSigning = async () => {
     // Ask user to unlock Metamask if its locked
-    await web3Provider.send("eth_requestAccounts", []);
+    await web3Provider.send('eth_requestAccounts', []);
     setIsSigning(true);
-  }
+  };
 
   let completeSigning = async (info) => {
-    const msg = "I want Teenage Engineering to make a beautiful and functional hardware wallet";
+    const msg =
+      'I want Teenage Engineering to make a beautiful and functional hardware wallet';
 
     const signer = web3Provider.getSigner();
     const address = await signer.getAddress();
+    const ens = await web3Provider.lookupAddress(address);
 
     // This will open a Metamask window and ask user to sign the message
     const signedMessage = await signer.signMessage(msg);
 
-    const payload = { address, signedMessage, info }
-
+    info = { ...info, address: address, ens: ens, signedDate: Timestamp.now() };
+    const payload = { address, signedMessage, info };
     console.log(payload);
+
     const reference = await addDoc(collection(db, 'testSignatures'), info);
-    
+
     setIsSigning(false);
   };
 
@@ -51,7 +54,8 @@ export default function Home() {
     // FIXME handle case where metamask is not installed. In that case, web3Provider
     // will stay undefined. Could conditionally render elsewhere on the page to say
     // user needs to install metamask.
-    web3Provider = window.ethereum ? new ethers.providers.Web3Provider(window.ethereum) 
+    web3Provider = window.ethereum
+      ? new ethers.providers.Web3Provider(window.ethereum)
       : undefined;
   });
 

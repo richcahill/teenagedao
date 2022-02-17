@@ -27,12 +27,12 @@ let dummySignatures = [
 ];
 
 let ellipsify = (str) => {
-  let shortened = str.substring(0, 3) + '...' + str.slice(-2);
+  let shortened = str.substring(0, 2) + '...' + str.slice(-4);
   return shortened;
 };
 
 function Signature(props) {
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className=' border-te-blue border-b text-te-blue'>
@@ -41,11 +41,15 @@ function Signature(props) {
           <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue bg-te-blue'>
             {props.icon && <img src={props.icon} className=' rounded-full' />}
           </div>
-          <div className='lowercase text-xl ml-4 font-light'>{props.ens}</div>
+          <div className='lowercase text-xl ml-4 font-light'>
+            {props.ens || (props.address && ellipsify(props.address))}
+          </div>
         </div>
         <div className='flex justify-center items-center space-x-8 opacity-40 text-sm'>
-          <div>{props.address && ellipsify(props.address)}</div>
-          <div>{props.signedDate}</div>
+          {/* <div>{props.address && ellipsify(props.address)}</div> */}
+          <div>
+            {props.signedDate && props.signedDate.toDate().toDateString()}
+          </div>
         </div>
         <button className='flex justify-end '>
           {props.handle && (
@@ -68,9 +72,9 @@ export default function Sign(props) {
     }
   );
 
-  if (!loading && signatures) {
-    signatures.docs.map((doc) => console.log(doc.data()));
-  }
+  // if (!loading && signatures) {
+  //   signatures.docs.map((doc) => console.log(doc.data()));
+  // }
 
   return (
     <>
