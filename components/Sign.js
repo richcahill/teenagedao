@@ -5,6 +5,12 @@ export default function Sign(props) {
   const [step, setIsStep] = useState(1);
   const [info, setInfo] = useState({ name: '', handle: '' });
 
+  // we'll need to do something with twitter tweet events  here
+  // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
+
+  let tweet =
+    "Let's build a beautiful hardware wallet with teenageDAO.xyz\n\n\n@teenageDAO @jugendingenieur";
+
   let signLetter = async (e) => {
     e.preventDefault();
     props.sign(info);
@@ -50,6 +56,17 @@ export default function Sign(props) {
               >
                 sign our love letter
               </button>
+              <a
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                  tweet
+                )}`}
+                data-size='large'
+                target='_blank'
+              >
+                <div className=' opacity-20 inline-block mt-6 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'>
+                  (test twitter button)
+                </div>
+              </a>
             </form>
           </>
         )}

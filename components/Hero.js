@@ -19,6 +19,12 @@ export default function Hero(props) {
       <Head>
         <title>teenage dao {question ? '?' : ''}</title>
         <link rel='icon' href='/favicon.png' />
+        <meta name='twitter:card' content='photo' />
+        <meta name='twitter:site' content='@example' />
+        <meta name='twitter:title' content='My picture' />
+        <meta name='twitter:description' content='A description' />
+        <meta name='twitter:image' content='https://i.imgur.com/Rqxgre3.png' />
+        <meta name='twitter:url' content='https://teenagedao.xyz' />
       </Head>
       <section className='relative header flex flex-col justify-between'>
         <Nav></Nav>
