@@ -9,7 +9,7 @@ export default function Sign(props) {
   // https://developer.twitter.com/en/docs/twitter-for-websites/tweet-button/overview
 
   let tweet =
-    "Let's build a beautiful hardware wallet with teenageDAO.xyz\n\n\n@teenageDAO @jugendingenieur";
+    "Let's build a beautiful hardware wallet with https://alpha.teenageDAO.xyz\n\n\n@teenageDAO @jugendingenieur";
 
   let signLetter = async (e) => {
     e.preventDefault();

@@ -20,9 +20,12 @@ export default function Hero(props) {
         <title>teenage dao {question ? '?' : ''}</title>
         <link rel='icon' href='/favicon.png' />
         <meta name='twitter:card' content='photo' />
-        <meta name='twitter:site' content='@example' />
-        <meta name='twitter:title' content='My picture' />
-        <meta name='twitter:description' content='A description' />
+        <meta name='twitter:site' content='@teenagedao' />
+        <meta name='twitter:title' content='TeenageDAO' />
+        <meta
+          name='twitter:description'
+          content="Let's build a beautiful hardware wallet together."
+        />
         <meta name='twitter:image' content='https://i.imgur.com/Rqxgre3.png' />
         {/* TODO make sure to remove alpha. before launch */}
         <meta name='twitter:url' content='https://alpha.teenagedao.xyz' />
