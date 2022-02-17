@@ -9,7 +9,7 @@ export default function Nav(props) {
           <p className='opacity-70'>teenage</p>
           <p className='opacity-100 relative z-20'>dao</p>
         </h1>
-        <div className='flex'>
+        {/* <div className='flex'>
           <img
             src='/img/icons/metamask.svg'
             alt='metamask logo'
@@ -19,7 +19,7 @@ export default function Nav(props) {
           <h1 className='title text-3xl font-light tracking-tight opacity-70 mt-1'>
             sign in with metamask
           </h1>
-        </div>
+        </div> */}
       </nav>
     </div>
   );
