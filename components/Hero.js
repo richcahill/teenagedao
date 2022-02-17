@@ -24,7 +24,8 @@ export default function Hero(props) {
         <meta name='twitter:title' content='My picture' />
         <meta name='twitter:description' content='A description' />
         <meta name='twitter:image' content='https://i.imgur.com/Rqxgre3.png' />
-        <meta name='twitter:url' content='https://teenagedao.xyz' />
+        {/* TODO make sure to remove alpha. before launch */}
+        <meta name='twitter:url' content='https://alpha.teenagedao.xyz' />
       </Head>
       <section className='relative header flex flex-col justify-between'>
         <Nav></Nav>
