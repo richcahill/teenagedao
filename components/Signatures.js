@@ -1,33 +1,33 @@
-import { db, app } from '../lib/clientApp.js';
-import { getFirestore, collection } from 'firebase/firestore';
-import { useCollection } from 'react-firebase-hooks/firestore';
+import { db, app } from "../lib/clientApp.js";
+import { getFirestore, collection } from "firebase/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
 
 let dummySignatures = [
   {
-    icon: 'https://i.pravatar.cc/100',
-    ens: 'address.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'handle',
+    icon: "https://i.pravatar.cc/100",
+    ens: "address.eth",
+    address: "0xcdff...ef",
+    signedDate: "17.1.2022 22:34",
+    handle: "handle",
   },
   {
-    icon: 'https://i.pravatar.cc/110',
-    ens: 'jolene.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'jolene',
+    icon: "https://i.pravatar.cc/110",
+    ens: "jolene.eth",
+    address: "0xcdff...ef",
+    signedDate: "17.1.2022 22:34",
+    handle: "jolene",
   },
   {
-    icon: 'https://i.pravatar.cc/120',
-    ens: 'potato.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'potato',
+    icon: "https://i.pravatar.cc/120",
+    ens: "potato.eth",
+    address: "0xcdff...ef",
+    signedDate: "17.1.2022 22:34",
+    handle: "potato",
   },
 ];
 
 let ellipsify = (str) => {
-  let shortened = str.substring(0, 2) + '...' + str.slice(-4);
+  let shortened = str.substring(0, 2) + "..." + str.slice(-4);
   return shortened;
 };
 
@@ -35,26 +35,26 @@ function Signature(props) {
   // console.log(props);
 
   return (
-    <div className=' border-te-blue border-b text-te-blue'>
-      <div className='mx-auto container p-4 md:py-8 grid grid-cols-3'>
-        <div className='flex items-center flex-1 '>
-          <div className='w-12 h-12 rounded-full outline-2 border-2 border-te-blue bg-te-blue'>
-            {props.icon && <img src={props.icon} className=' rounded-full' />}
+    <div className=" border-te-blue border-b text-te-blue">
+      <div className="mx-auto container p-4 md:py-8 grid grid-cols-3">
+        <div className="flex items-center flex-1 ">
+          <div className="w-12 h-12 rounded-full outline-2 border-2 border-te-blue bg-te-blue">
+            {props.icon && <img src={props.icon} className=" rounded-full" />}
           </div>
-          <div className='lowercase text-xl ml-4 font-light'>
+          <div className="lowercase text-xl ml-4 font-light">
             {props.ens || (props.address && ellipsify(props.address))}
           </div>
         </div>
-        <div className='flex justify-center items-center space-x-8 opacity-40 text-sm'>
+        <div className="flex justify-center items-center space-x-8 opacity-40 text-sm">
           {/* <div>{props.address && ellipsify(props.address)}</div> */}
           <div>
             {props.signedDate && props.signedDate.toDate().toDateString()}
           </div>
         </div>
-        <button className='flex justify-end '>
+        <button className="flex justify-end ">
           {props.handle && (
-            <div className='py-2 px-3 pr-4 bg-te-orange text-white text-lg font-light flex rounded-sm space-x-2'>
-              <img src='/img/check.svg' />
+            <div className="py-2 px-3 pr-4 bg-te-orange text-white text-lg font-light flex rounded-sm space-x-2">
+              <img src="/img/check.svg" />
               <p>@{props.handle}</p>
             </div>
           )}
@@ -66,7 +66,7 @@ function Signature(props) {
 
 export default function Sign(props) {
   const [signatures, loading, error] = useCollection(
-    collection(db, 'testSignatures'),
+    collection(db, "testSignatures"),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
@@ -78,28 +78,28 @@ export default function Sign(props) {
 
   return (
     <>
-      <section className='pb-16 bg-te-grey py-8 text-te-blue'>
-        <div className='container mx-auto relative text-center'>
-          <div className='mt-6 uppercase text-xl text-center tracking-wide '>
+      <section className="pb-16 py-8 px-4 bg-te-greytext-te-blue">
+        <div className="container mx-auto relative text-center">
+          <div className="mt-6 uppercase text-xl text-center tracking-wide ">
             Step 1
           </div>
-          <div className='text-center text-8xl lowercase font-light tracking-tight mt-6 max-w-4xl mx-auto'>
+          <div className="text-center text-8xl lowercase font-light tracking-tight mt-6 max-w-4xl mx-auto">
             This love letter needs your signature.
           </div>
-          <div className='text-center text-lg lowercase font-light tracking-tight mt-12 max-w-lg mx-auto'>
+          <div className="text-center text-lg lowercase font-light tracking-tight mt-12 max-w-lg mx-auto">
             sign with your wallet to show support for this idea and potential
             customer interest. It might eventually lead to DAO creation and
             raising fund to collaborate with TE on designing a hardware wallet.
           </div>
           <button
             onClick={props.openSigningModal}
-            className='mt-8 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'
+            className="mt-8 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300"
           >
             sign with metamask
           </button>
         </div>
       </section>
-      <section className='bg-te-grey py-16'>
+      <section className="bg-te-grey py-16 px-4">
         {error && <strong>Error: {JSON.stringify(error)}</strong>}
         {loading && <span>loading signatures...</span>}
         {signatures && (
@@ -110,8 +110,8 @@ export default function Sign(props) {
           </>
         )}
 
-        <div className=' flex justify-center mt-8'>
-          <button className='uppercase border-b border-te-blue text-te-blue text-sm transition hover:opacity-80 duration-300'>
+        <div className=" flex justify-center mt-8">
+          <button className="uppercase border-b border-te-blue text-te-blue text-sm transition hover:opacity-80 duration-300">
             show more
           </button>
         </div>
