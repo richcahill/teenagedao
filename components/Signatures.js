@@ -35,25 +35,21 @@ function Signature(props) {
   // console.log(props);
 
   return (
-    <div className=" border-te-blue border-b text-te-blue">
-      <div className="mx-auto container p-4 md:py-8 grid grid-cols-3">
-        <div className="flex items-center flex-1 ">
-          <div className="w-12 h-12 rounded-full outline-2 border-2 border-te-blue bg-te-blue">
-            {props.icon && <img src={props.icon} className=" rounded-full" />}
-          </div>
-          <div className="lowercase text-xl ml-4 font-light">
-            {props.ens || (props.address && ellipsify(props.address))}
-          </div>
-        </div>
-        <div className="flex justify-center items-center space-x-8 opacity-40 text-sm">
-          {/* <div>{props.address && ellipsify(props.address)}</div> */}
-          <div>
+    <div className="mx-auto max-w-[720px] container py-4 md:py-8 flex flex-row flex-nowrap space-x-2 sm:space-x-4 space-between border-te-blue border-b text-te-blue">
+      <div className="flex-none w-8 h-8 sm:w-14 sm:h-14 rounded-full border-2 border-te-blue bg-te-blue">
+        {props.icon && <img src={props.icon} className=" rounded-full" />}
+      </div>
+      <div className="flex-1 flex flex-col flex-nowrap space-y-2 lowercase text-xl ml-2 font-light sm:flex-row sm:space-y-0 sm:space-x-8">
+        <span className="text-base flex-1">
+          {props.ens || (props.address && ellipsify(props.address))}
+          <br />
+          <span className="text-xs opacity-60">
             {props.signedDate && props.signedDate.toDate().toDateString()}
-          </div>
-        </div>
-        <button className="flex justify-end ">
+          </span>
+        </span>
+        <button className="flex-initial mr-auto">
           {props.handle && (
-            <div className="py-2 px-3 pr-4 bg-te-orange text-white text-lg font-light flex rounded-sm space-x-2">
+            <div className="py-2 px-3 pr-4 bg-te-orange text-white text-sm font-light flex rounded-sm space-x-2">
               <img src="/img/check.svg" />
               <p>@{props.handle}</p>
             </div>
