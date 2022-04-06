@@ -1,5 +1,5 @@
 import How from '../components/How';
-import LFB from '../components/LFB';
+import LFB from '../components/LFBsvg';
 import Why from '../components/Why';
 import WhatIf from '../components/WhatIf';
 import Signatures from '../components/Signatures';
