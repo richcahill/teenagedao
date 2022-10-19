@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useConnect } from 'wagmi';
 
 export default function Sign(props) {
   // steps for additional steps that haven't been built yet
@@ -17,7 +18,15 @@ export default function Sign(props) {
   };
 
   let updateInfo = (e) => {
-    setInfo({ ...info, [e.target.id]: e.target.value });
+    if (e.target.id === 'handle') {
+      var strippedString = e.target.value.replace(
+        /[`" "~!@#$%^&*()|+\-=?;:'",.<>\{\}\[\]\\\/]/gi,
+        ''
+      );
+      setInfo({ ...info, [e.target.id]: strippedString });
+    } else {
+      setInfo({ ...info, [e.target.id]: e.target.value });
+    }
   };
 
   return (
@@ -25,7 +34,9 @@ export default function Sign(props) {
       <div className='fixed bg-te-black opacity-90 w-full h-full' />
       <div
         className='fixed backdrop-blur-lg w-full h-full'
-        onClick={props.close}
+        onClick={() => {
+          props.setIsSigning(false);
+        }}
       />
 
       <div className='bg-white relative z-40 py-12 px-6 rounded-sm text-center md:-mt-40'>
@@ -38,18 +49,22 @@ export default function Sign(props) {
             <form className='mt-6 flex flex-col'>
               <input
                 className='px-5 py-3 border border-te-black w-96 rounded-sm'
-                placeholder='your name or alias '
+                placeholder='your name or alias'
                 id='name'
                 onChange={updateInfo}
                 value={info.name}
               ></input>
-              <input
-                className='mt-2 px-5 py-3 border border-te-black w-96 rounded-sm'
-                placeholder='your twitter username '
-                id='handle'
-                onChange={updateInfo}
-                value={info.handle}
-              ></input>
+              {/* do something funky here to prepend a @ symbol to the front of the handle */}
+              <div className='mt-2  border border-te-black w-96 rounded-sm relative flex'>
+                <div className='pl-4 pr-4 py-3 border-r border-te-black'>@</div>
+                <input
+                  className='pr-4 pl-4 py-3 w-96 rounded-sm'
+                  placeholder='your twitter username'
+                  id='handle'
+                  onChange={updateInfo}
+                  value={info.handle}
+                ></input>
+              </div>
               <button
                 onClick={signLetter}
                 className='mt-6 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'

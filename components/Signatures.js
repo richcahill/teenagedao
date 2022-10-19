@@ -2,30 +2,6 @@ import { db, app } from '../lib/clientApp.js';
 import { getFirestore, collection } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 
-let dummySignatures = [
-  {
-    icon: 'https://i.pravatar.cc/100',
-    ens: 'address.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'handle',
-  },
-  {
-    icon: 'https://i.pravatar.cc/110',
-    ens: 'jolene.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'jolene',
-  },
-  {
-    icon: 'https://i.pravatar.cc/120',
-    ens: 'potato.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'potato',
-  },
-];
-
 let ellipsify = (str) => {
   let shortened = str.substring(0, 2) + '...' + str.slice(-4);
   return shortened;
@@ -60,7 +36,7 @@ function Signature(props) {
   );
 }
 
-export default function Sign(props) {
+export default function Signatures(props) {
   const [signatures, loading, error] = useCollection(
     collection(db, 'testSignatures'),
     {
@@ -88,7 +64,9 @@ export default function Sign(props) {
             raising fund to collaborate with TE on designing a hardware wallet.
           </div>
           <button
-            onClick={props.openSigningModal}
+            onClick={() => {
+              props.setIsSigning(true);
+            }}
             className='mt-8 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'
           >
             sign with metamask
