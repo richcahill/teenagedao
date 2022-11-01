@@ -1,5 +1,11 @@
 import { db, app } from '../lib/clientApp.js';
-import { getFirestore, collection, orderBy, query } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  orderBy,
+  query,
+  doc,
+} from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { ConnectKitButton } from 'connectkit';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
@@ -52,9 +58,15 @@ export default function Signatures(props) {
 
   const { address, isConnecting, isDisconnected, useEnsAddress } = useAccount();
 
-  // if (!loading && signatures) {
-  //   signatures.docs.map((doc) => console.log(doc.data()));
-  // }
+  if (!loading && signatures) {
+    signatures.docs.map((doc) => {
+      if (doc.data().info.address === address) {
+        console.log(address + ' has already signed');
+        props.setHasSigned(true);
+      }
+      console.log(doc.data());
+    });
+  }
 
   return (
     <>
@@ -75,8 +87,7 @@ export default function Signatures(props) {
           {/* conditional check to see if there is a wallet connected, otherwise open up the connectkit modal */}
 
           {address ? (
-            <>
-              <div></div>
+            !props.hasSigned ? (
               <button
                 onClick={() => {
                   props.setIsSigning(true);
@@ -85,7 +96,11 @@ export default function Signatures(props) {
               >
                 sign letter
               </button>
-            </>
+            ) : (
+              <div className='mt-16 p-4 px-6 bg-te-blue m-auto w-96 text-white flex justify-between'>
+                <span>you've signed</span> <span>✓</span>
+              </div>
+            )
           ) : (
             <ConnectKitButton.Custom>
               {({ isConnected, show }) => {

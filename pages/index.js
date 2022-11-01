@@ -14,6 +14,7 @@ import { db } from '../lib/clientApp.js';
 
 export default function Home() {
   const [isSigning, setIsSigning] = useState(false);
+  const [hasSigned, setHasSigned] = useState(false);
 
   let addToSignaturesList = async (info, address, signedMessage) => {
     const payload = {
@@ -35,6 +36,7 @@ export default function Home() {
       {isSigning && (
         <Sign
           setIsSigning={setIsSigning}
+          setHasSigned={setHasSigned}
           addToSignaturesList={addToSignaturesList}
         />
       )}
@@ -43,7 +45,11 @@ export default function Home() {
       <WhatIf />
       <Why />
       <How />
-      <Signatures setIsSigning={setIsSigning} />
+      <Signatures
+        setIsSigning={setIsSigning}
+        setHasSigned={setHasSigned}
+        hasSigned={hasSigned}
+      />
       <LFB />
       <Footer />
     </div>
