@@ -9,17 +9,35 @@ import Hero from '../components/Hero';
 import Sign from '../components/Sign';
 
 import { useState, useEffect } from 'react';
-import { ethers } from 'ethers';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
-import { db, app } from '../lib/clientApp.js';
+import { db } from '../lib/clientApp.js';
 
 export default function Home() {
   const [isSigning, setIsSigning] = useState(false);
-  const [isSigned, setIsSigned] = useState(false);
+
+  let addToSignaturesList = async (info, address, signedMessage) => {
+    const payload = {
+      message: signedMessage,
+      info: info,
+      created: Date.now(),
+    };
+
+    const reference = await addDoc(collection(db, 'testSignatures'), payload);
+    console.log(reference.id);
+
+    if (reference.id) {
+      setIsSigning(false);
+    }
+  };
 
   return (
     <div className='h-screen bg-zinc-100 overflow-y-scroll'>
-      {isSigning && <Sign setIsSigning={setIsSigning} />}
+      {isSigning && (
+        <Sign
+          setIsSigning={setIsSigning}
+          addToSignaturesList={addToSignaturesList}
+        />
+      )}
       <Hero />
       <CallToAction />
       <WhatIf />
