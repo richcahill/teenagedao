@@ -1,50 +1,71 @@
-import '../public/styles/globals.css';
-import { Provider, chain, createClient } from 'wagmi';
+import {
+  WagmiConfig,
+  createClient,
+  defaultChains,
+  configureChains,
+  chain,
+} from 'wagmi';
+import {
+  ConnectKitProvider,
+  ConnectKitButton,
+  getDefaultClient,
+} from 'connectkit';
+
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+
 import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
+import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
 
-// API key for Ethereum node
-// Two popular services are Alchemy (alchemy.com) and Infura (infura.io)
-const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_SECRET;
+import '../public/styles/globals.css';
 
-const defaultChain = chain.mainnet;
+// Configure chains & providers with the Alchemy provider.
+// Two popular providers are Alchemy (alchemy.com) and Infura (infura.io)
+const { chains, provider, webSocketProvider } = configureChains(defaultChains, [
+  alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_SECRET }),
+  publicProvider(),
+]);
 
-// Set up connectors
+// Set up client
 const client = createClient({
-  autoConnect: true,
-  connectors({ chainId }) {
-    const chain = defaultChain;
-    const rpcUrl = chain.rpcUrls.alchemy
-      ? `${chain.rpcUrls.alchemy}/${alchemyId}`
-      : chain.rpcUrls.default;
-    return [
-      new InjectedConnector(),
-      new CoinbaseWalletConnector({
-        options: {
-          appName: 'wagmi',
-          chainId: chain.id,
-          jsonRpcUrl: rpcUrl,
-        },
-      }),
-      new WalletConnectConnector({
-        options: {
-          qrcode: true,
-          rpc: {
-            [chain.id]: rpcUrl,
-          },
-        },
-      }),
-    ];
-  },
+  autoConnect: false,
+  connectors: [
+    new MetaMaskConnector({ chains: [chain.mainnet] }),
+    new CoinbaseWalletConnector({
+      chains,
+      options: {
+        appName: 'teenageDAO',
+      },
+    }),
+    new WalletConnectConnector({
+      chains,
+      options: {
+        qrcode: true,
+      },
+    }),
+    new InjectedConnector({
+      chains,
+      options: {
+        name: 'Injected',
+        shimDisconnect: true,
+      },
+    }),
+  ],
+  provider,
+  webSocketProvider,
 });
 
-function MyApp({ Component, pageProps }) {
+// Pass client to React Context Provider
+function App({ Component, pageProps }) {
   return (
-    <Provider client={client}>
-      <Component {...pageProps} />
-    </Provider>
+    <WagmiConfig client={client}>
+      <ConnectKitProvider theme='minimal'>
+        <Component {...pageProps} />
+      </ConnectKitProvider>
+    </WagmiConfig>
   );
 }
 
-export default MyApp;
+export default App;
