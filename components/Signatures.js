@@ -1,30 +1,10 @@
 import { db, app } from '../lib/clientApp.js';
-import { getFirestore, collection } from 'firebase/firestore';
+import { getFirestore, collection, orderBy, query } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
-
-let dummySignatures = [
-  {
-    icon: 'https://i.pravatar.cc/100',
-    ens: 'address.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'handle',
-  },
-  {
-    icon: 'https://i.pravatar.cc/110',
-    ens: 'jolene.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'jolene',
-  },
-  {
-    icon: 'https://i.pravatar.cc/120',
-    ens: 'potato.eth',
-    address: '0xcdff...ef',
-    signedDate: '17.1.2022 22:34',
-    handle: 'potato',
-  },
-];
+import { ConnectKitButton } from 'connectkit';
+import { useAccount, useConnect, useDisconnect } from 'wagmi';
+import truncateEthAddress from 'truncate-eth-address';
+import dayjs from 'dayjs';
 
 let ellipsify = (str) => {
   let shortened = str.substring(0, 2) + '...' + str.slice(-4);
@@ -41,17 +21,19 @@ function Signature(props) {
       </div>
       <div className='flex-1 flex flex-col flex-nowrap space-y-2 lowercase text-xl ml-2 font-light sm:flex-row sm:space-y-0 sm:space-x-8'>
         <span className='text-base flex-1'>
-          {props.ens || (props.address && ellipsify(props.address))}
+          {props.info.ens ||
+            (props.info.address && truncateEthAddress(props.info.address))}
           <br />
           <span className='text-xs opacity-60'>
-            {props.signedDate && props.signedDate.toDate().toDateString()}
+            {props.created &&
+              dayjs(props.created).format('YYYY/MM/DD @ HH:mm:ssA')}
           </span>
         </span>
         <button className='flex-initial mr-auto'>
-          {props.handle && (
+          {props.info.handle && (
             <div className='py-2 px-3 pr-4 bg-te-orange text-white text-sm font-light flex rounded-sm space-x-2'>
               <img src='/img/check.svg' />
-              <p>@{props.handle}</p>
+              <p>@{props.info.handle}</p>
             </div>
           )}
         </button>
@@ -60,13 +42,15 @@ function Signature(props) {
   );
 }
 
-export default function Sign(props) {
+export default function Signatures(props) {
   const [signatures, loading, error] = useCollection(
-    collection(db, 'testSignatures'),
+    query(collection(db, 'testSignatures'), orderBy('created', 'desc')),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }
   );
+
+  const { address, isConnecting, isDisconnected, useEnsAddress } = useAccount();
 
   // if (!loading && signatures) {
   //   signatures.docs.map((doc) => console.log(doc.data()));
@@ -87,12 +71,35 @@ export default function Sign(props) {
             customer interest. It might eventually lead to DAO creation and
             raising fund to collaborate with TE on designing a hardware wallet.
           </div>
-          <button
-            onClick={props.openSigningModal}
-            className='mt-8 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'
-          >
-            sign with metamask
-          </button>
+
+          {/* conditional check to see if there is a wallet connected, otherwise open up the connectkit modal */}
+
+          {address ? (
+            <>
+              <div></div>
+              <button
+                onClick={() => {
+                  props.setIsSigning(true);
+                }}
+                className='mt-8 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'
+              >
+                sign letter
+              </button>
+            </>
+          ) : (
+            <ConnectKitButton.Custom>
+              {({ isConnected, show }) => {
+                return (
+                  <button
+                    onClick={show}
+                    className='mt-8 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white mx-auto hover:opacity-90 hover:shadow-lg transition duration-300'
+                  >
+                    {isConnected ? 'sign letter' : 'connect wallet and sign'}
+                  </button>
+                );
+              }}
+            </ConnectKitButton.Custom>
+          )}
         </div>
       </section>
       <section className='bg-te-grey py-16 px-4'>
