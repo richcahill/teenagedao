@@ -1,7 +1,9 @@
 module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
+    './app/**/*.{js,ts,jsx,tsx}',
+
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     fluidType: {
@@ -15,8 +17,8 @@ module.exports = {
         ratioMax: 1.2, // Multiplicator Max
         screenMin: 20, // 20rem === 320px
         screenMax: 96, // 96rem === 1536px
-        unit: "rem", // default is rem but it's also possible to use 'px'
-        prefix: "", // set a prefix to use it alongside the default font sizes
+        unit: 'rem', // default is rem but it's also possible to use 'px'
+        prefix: '', // set a prefix to use it alongside the default font sizes
       },
       // Creates the text-xx classes
       // This are the default settings and analog to the tailwindcss defaults
@@ -27,28 +29,28 @@ module.exports = {
         base: [0, 1.6],
         lg: [1, 1.6],
         xl: [2, 1.2],
-        "2xl": [3, 1.2],
-        "3xl": [4, 1.2],
-        "4xl": [5, 1.1],
-        "5xl": [6, 1.1],
-        "6xl": [7, 1.1],
-        "7xl": [8, 1],
-        "8xl": [9, 1],
-        "9xl": [10, 1],
+        '2xl': [3, 1.2],
+        '3xl': [4, 1.2],
+        '4xl': [5, 1.1],
+        '5xl': [6, 1.1],
+        '6xl': [7, 1.1],
+        '7xl': [8, 1],
+        '8xl': [9, 1],
+        '9xl': [10, 1],
       },
     },
     extend: {
       colors: {
-        "te-orange": "#ffa700",
-        "te-blue": "#0087e6",
-        "te-red": "#ff5f00",
-        "te-black": "#0c0a0e",
-        "te-grey": "#ececec",
+        'te-orange': '#ffa700',
+        'te-blue': '#0087e6',
+        'te-red': '#ff5f00',
+        'te-black': '#0c0a0e',
+        'te-grey': '#ececec',
       },
     },
   },
   variants: {
-    fluidType: ["responsive"],
+    fluidType: ['responsive'],
   },
-  plugins: [require("tailwindcss-fluid-type")],
+  plugins: [require('tailwindcss-fluid-type')],
 };
