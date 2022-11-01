@@ -17,7 +17,7 @@ export default function Hero(props) {
   return (
     <>
       <Head>
-        <title>teenage dao {question ? '?' : ''}</title>
+        <title>teenage dao ?</title>
         <link rel='icon' href='/favicon.png' />
         <meta name='twitter:card' content='photo' />
         <meta name='twitter:site' content='@teenagedao' />
@@ -36,9 +36,9 @@ export default function Hero(props) {
           <Image
             priority
             src='/img/wallet-render.png'
-            layout='fill'
+            fill
             quality={90}
-            objectFit='cover'
+            alt='a mysterious rendering of a product that could be'
           />
         </div>
 
