@@ -32,13 +32,15 @@ export default function Hero(props) {
       </Head>
       <section className='relative min-h-[75vh] flex flex-col justify-between'>
         <Nav></Nav>
-        <div className='absolute top-0 left-0 w-full bg-blue-500 h-full'>
-          <Image
-            priority
-            src='/img/wallet-render.png'
-            fill
-            quality={90}
+        <div
+          className='absolute top-0 left-0 w-full bg-blue-500 h-full flex justify-end'
+          style={{ backgroundColor: '#020202' }}
+        >
+          <img
+            src='/img/wallet-48.gif'
+            className=' object-cover w-2/3 relative scale-150 transition z-0 translate-x-48 translate-y-64'
             alt='a mysterious rendering of a product that could be'
+            style={{ imageRendering: 'pixelated' }}
           />
         </div>
 
