@@ -18,5 +18,6 @@ A website to get the world hyped about building a hardware wallet together.
 [ ] Truncate show more signature page
 [ ] Show # of signatures
 [ ] Proper firebase rules
+[ ] User written signature
 
  

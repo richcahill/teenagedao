@@ -11,13 +11,9 @@ import { ConnectKitButton } from 'connectkit';
 import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import truncateEthAddress from 'truncate-eth-address';
 import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 import ShareToTwitterButton from '../components/elements/ShareToTwitterButton';
-
-let ellipsify = (str) => {
-  let shortened = str.substring(0, 2) + '...' + str.slice(-4);
-  return shortened;
-};
 
 function Signature(props) {
   // console.log(props);
@@ -67,13 +63,20 @@ export default function Signatures(props) {
 
   if (!loading && signatures) {
     signatures.docs.map((doc) => {
-      if (doc.data().info.address === address) {
+      if (doc.data().info.address == address) {
         console.log(address + ' has already signed');
         props.setHasSigned(true);
       }
       // console.log(doc.data());
     });
   }
+
+  // Pop up the sign flow once the user has connected their wallet
+  useEffect(() => {
+    if (address && props.hasSigned === false) {
+      props.setIsSigning(true);
+    }
+  });
 
   return (
     <>
@@ -85,13 +88,13 @@ export default function Signatures(props) {
           <div className='text-center text-8xl lowercase font-light tracking-tight mt-6 max-w-4xl mx-auto'>
             This love letter needs your signature.
           </div>
-          <div className='text-center text-lg lowercase font-light tracking-tight mt-12 max-w-2xl mx-auto'>
+          <div className='text-center text-lg lowercase font-light tracking-tight mt-12 max-w-3xl mx-auto'>
             sign with your wallet to show support for this idea and potential
             customer interest. It might eventually lead to DAO creation and
-            raising fund to collaborate with TE on designing a hardware wallet.
+            raising funds to collaborate with TE on designing a hardware wallet.
           </div>
 
-          {/* conditional check to see if there is a wallet connected, otherwise open up the connectkit modal */}
+          {/* conditional check to see if there is a wallet connected, otherwise show the connectkit button */}
 
           {address ? (
             !props.hasSigned ? (
