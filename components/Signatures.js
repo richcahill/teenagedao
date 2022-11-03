@@ -52,6 +52,8 @@ function Signature(props) {
 }
 
 export default function Signatures(props) {
+  // get the collection of signatures from firebase
+  // TODO update this to production signatures db
   const [signatures, loading, error] = useCollection(
     query(collection(db, 'testSignatures'), orderBy('created', 'desc')),
     {
@@ -59,8 +61,10 @@ export default function Signatures(props) {
     }
   );
 
+  // get the ethereum address from wagmi
   const { address, isConnecting, isDisconnected, useEnsAddress } = useAccount();
 
+  // once the signatures have loaded, check to see if the user has already signed
   if (!loading && signatures) {
     signatures.docs.map((doc) => {
       if (doc.data().info.address == address) {
@@ -95,7 +99,6 @@ export default function Signatures(props) {
           </div>
 
           {/* conditional check to see if there is a wallet connected, otherwise show the connectkit button */}
-
           {address ? (
             !props.hasSigned ? (
               <button
