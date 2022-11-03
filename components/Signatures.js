@@ -12,6 +12,8 @@ import { useAccount, useConnect, useDisconnect } from 'wagmi';
 import truncateEthAddress from 'truncate-eth-address';
 import dayjs from 'dayjs';
 
+import ShareToTwitterButton from '../components/elements/ShareToTwitterButton';
+
 let ellipsify = (str) => {
   let shortened = str.substring(0, 2) + '...' + str.slice(-4);
   return shortened;
@@ -22,8 +24,13 @@ function Signature(props) {
 
   return (
     <div className='mx-auto max-w-[720px] container py-4 md:py-8 flex flex-row flex-nowrap space-x-2 sm:space-x-4 space-between border-te-blue border-b text-te-blue'>
-      <div className='flex-none w-8 h-8 sm:w-14 sm:h-14 rounded-full border-2 border-te-blue bg-te-blue'>
-        {props.icon && <img src={props.icon} className=' rounded-full' />}
+      <div className='flex w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-te-blue relative'>
+        {props.info.photo && (
+          <img
+            src={props.info.photo}
+            className=' rounded-full opacity-80 w-full'
+          />
+        )}
       </div>
       <div className='flex-1 flex flex-col flex-nowrap space-y-2 lowercase text-xl ml-2 font-light sm:flex-row sm:space-y-0 sm:space-x-8'>
         <span className='text-base flex-1'>
@@ -64,7 +71,7 @@ export default function Signatures(props) {
         console.log(address + ' has already signed');
         props.setHasSigned(true);
       }
-      console.log(doc.data());
+      // console.log(doc.data());
     });
   }
 
@@ -97,8 +104,13 @@ export default function Signatures(props) {
                 sign letter
               </button>
             ) : (
-              <div className='mt-16 p-4 px-6 bg-te-blue m-auto w-96 text-white flex justify-between'>
-                <span>you've signed</span> <span>✓</span>
+              <div className='flex mt-16  justify-center space-x-4'>
+                <div className='p-4 px-6 text-te-black space-x-12  border border-te-black bg-te-grey box-border'>
+                  <span>you've signed</span> <span>✓</span>
+                </div>
+                <div className=' flex '>
+                  <ShareToTwitterButton></ShareToTwitterButton>
+                </div>
               </div>
             )
           ) : (
