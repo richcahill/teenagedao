@@ -33,7 +33,7 @@ export default function Home() {
 
   return (
     <div className='h-screen bg-zinc-100 overflow-y-scroll'>
-      {isSigning && (
+      {isSigning && !hasSigned && (
         <Sign
           setIsSigning={setIsSigning}
           setHasSigned={setHasSigned}

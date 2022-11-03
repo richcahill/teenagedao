@@ -77,7 +77,7 @@ export default function Signatures(props) {
 
   // Pop up the sign flow once the user has connected their wallet
   useEffect(() => {
-    if (address && props.hasSigned === false) {
+    if (address) {
       props.setIsSigning(true);
     }
   });
