@@ -10,13 +10,16 @@ A website to get the world hyped about building a hardware wallet together.
 [x] Ensure users can't sign twice with the same wallet
 [x] Update header image with pixelated render of fake wallet
 [x] Check that the Twitter account belongs to the individual
+[x] Async on the signing modal to stop database add before user auths signature
+[x] Truncate show more signature page
+[x] Show # of signatures
+
 
 ## In Progress
-[ ] Async on the signing modal to stop database add before user auths signature
+
+
 
 ## Backlog
-[ ] Truncate show more signature page
-[ ] Show # of signatures
 [ ] Proper firebase rules
 [ ] User written signature
 
