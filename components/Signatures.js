@@ -19,7 +19,13 @@ function Signature(props) {
   // console.log(props);
 
   return (
-    <div className='mx-auto max-w-[720px] container py-4 md:py-8 flex flex-row flex-nowrap space-x-2 sm:space-x-4 space-between border-te-blue border-b text-te-blue'>
+    <div
+      className={`mx-auto max-w-[720px] container py-4 md:py-8 flex flex-row flex-nowrap space-x-2 sm:space-x-4 space-between ${
+        props.info.address === props.activeAddress
+          ? 'border-te-orange'
+          : 'border-te-blue'
+      } border-b text-te-blue`}
+    >
       <div className='flex w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-te-blue relative'>
         {props.info.photo && (
           <img
@@ -52,6 +58,9 @@ function Signature(props) {
 }
 
 export default function Signatures(props) {
+  // set the amount of signatures to initally show
+  const [shownSignatureCount, setShownSignatureCount] = useState(10);
+
   // get the collection of signatures from firebase
   // TODO update this to production signatures db
   const [signatures, loading, error] = useCollection(
@@ -140,16 +149,38 @@ export default function Signatures(props) {
         {loading && <span>loading signatures...</span>}
         {signatures && (
           <>
-            {signatures.docs.map((signature, i) => {
-              return <Signature {...signature.data()} key={i} />;
-            })}
+            <div class='max-w-[720px] container mx-auto text-te-blue flex justify-center'>
+              {shownSignatureCount > signatures.docs.length
+                ? signatures.docs.length
+                : shownSignatureCount < signatures.docs.length &&
+                  shownSignatureCount}{' '}
+              of {signatures.docs.length} signatures
+            </div>
+            {signatures.docs
+              .slice(0, shownSignatureCount)
+              .map((signature, i) => {
+                return (
+                  <Signature
+                    {...signature.data()}
+                    activeAddress={address}
+                    key={i}
+                  />
+                );
+              })}
           </>
         )}
 
-        <div className=' flex justify-center mt-8'>
-          <button className='uppercase border-b border-te-blue text-te-blue text-sm transition hover:opacity-80 duration-300'>
-            show more
-          </button>
+        <div className=' flex justify-center mt-8 font-light'>
+          {signatures && shownSignatureCount < signatures.docs.length && (
+            <button
+              onClick={() => {
+                setShownSignatureCount(shownSignatureCount + 10);
+              }}
+              className='uppercase border-b border-te-blue text-te-blue text-sm transition hover:opacity-80 duration-300'
+            >
+              show more
+            </button>
+          )}
         </div>
       </section>
     </>
