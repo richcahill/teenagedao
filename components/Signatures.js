@@ -37,7 +37,7 @@ function Signature(props) {
           {props.info.ens ||
             (props.info.address && truncateEthAddress(props.info.address))}
           <br />
-          <div className='text-xs opacity-100 mb-4 max-w-xs'>
+          <div className='text-xs opacity-100 mb-4 max-w-xs normal-case'>
             {props.message}
           </div>
           <div className='text-xs opacity-60'>
