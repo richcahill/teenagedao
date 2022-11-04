@@ -1,6 +1,6 @@
 export default function ShareToTwitterButton(props) {
   let tweet =
-    "Let's build a beautiful hardware wallet with alpha.teenageDAO.xyz\n\n@teenageDAO @jugendingenieur";
+    "Let's build a beautiful hardware wallet with teenageDAO.xyz\n\n@teenageDAO @jugendingenieur";
 
   return (
     <a
