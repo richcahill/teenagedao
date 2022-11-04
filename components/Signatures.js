@@ -69,9 +69,8 @@ export default function Signatures(props) {
   const [shownSignatureCount, setShownSignatureCount] = useState(10);
 
   // get the collection of signatures from firebase
-  // TODO update this to production signatures db
   const [signatures, loading, error] = useCollection(
-    query(collection(db, 'testSignatures'), orderBy('created', 'desc')),
+    query(collection(db, 'signatures'), orderBy('created', 'desc')),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
     }

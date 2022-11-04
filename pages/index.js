@@ -23,7 +23,7 @@ export default function Home() {
       created: Date.now(),
     };
 
-    const reference = await addDoc(collection(db, 'testSignatures'), payload);
+    const reference = await addDoc(collection(db, 'signatures'), payload);
     console.log(reference.id);
 
     if (reference.id) {

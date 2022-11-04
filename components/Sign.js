@@ -45,8 +45,6 @@ export default function Sign(props) {
     });
   };
 
-  // TODO you need to sort out the flow where it signs it, then adds to database and then closes the modal
-
   // jankily use an effect to see if the state for signed has updated and then add to db and close the modal
   useEffect(() => {
     if (!hasSignedMessage) {

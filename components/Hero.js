@@ -27,8 +27,7 @@ export default function Hero(props) {
           content="Let's build a beautiful hardware wallet together."
         />
         <meta name='twitter:image' content='https://i.imgur.com/Rqxgre3.png' />
-        {/* TODO make sure to remove alpha. before launch */}
-        <meta name='twitter:url' content='https://alpha.teenagedao.xyz' />
+        <meta name='twitter:url' content='https://teenagedao.xyz' />
       </Head>
       <section className='relative min-h-[75vh] flex flex-col justify-between'>
         <Nav></Nav>
