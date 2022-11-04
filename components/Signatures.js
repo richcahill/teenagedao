@@ -20,11 +20,9 @@ function Signature(props) {
 
   return (
     <div
-      className={`mx-auto max-w-[720px] container py-4 md:py-8 flex flex-row flex-nowrap space-x-2 sm:space-x-4 space-between ${
-        props.info.address === props.activeAddress
-          ? 'border-te-orange'
-          : 'border-te-blue'
-      } border-b text-te-blue`}
+      className={`mx-auto max-w-[720px] container py-4 px-4 md:py-8 flex flex-row flex-nowrap space-x-2 sm:space-x-4 space-between ${
+        props.info.address === props.activeAddress && ' bg-white'
+      } border-te-blue border-b text-te-blue`}
     >
       <div className='flex w-8 h-8 sm:w-14 sm:h-14 rounded-full bg-te-blue relative'>
         {props.info.photo && (
@@ -35,21 +33,30 @@ function Signature(props) {
         )}
       </div>
       <div className='flex-1 flex flex-col flex-nowrap space-y-2 lowercase text-xl ml-2 font-light sm:flex-row sm:space-y-0 sm:space-x-8'>
-        <span className='text-base flex-1'>
+        <div className='text-base flex-1'>
           {props.info.ens ||
             (props.info.address && truncateEthAddress(props.info.address))}
           <br />
-          <span className='text-xs opacity-60'>
+          <div className='text-xs opacity-100 mb-4 max-w-xs'>
+            {props.message}
+          </div>
+          <div className='text-xs opacity-60'>
             {props.created &&
               dayjs(props.created).format('YYYY/MM/DD @ HH:mm:ssA')}
-          </span>
-        </span>
-        <button className='flex-initial mr-auto'>
+          </div>
+        </div>
+        <button className='flex items-start'>
           {props.info.handle && (
-            <div className='py-2 px-3 pr-4 bg-te-orange text-white text-sm font-light flex rounded-sm space-x-2'>
-              <img src='/img/check.svg' />
-              <p>@{props.info.handle}</p>
-            </div>
+            <a
+              href={`https://twitter.com/${props.info.handle}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <div className='py-2 px-3 pr-4 bg-te-orange text-white text-sm font-light flex rounded-sm space-x-2'>
+                <img src='/img/check.svg' />
+                <p>@{props.info.handle}</p>
+              </div>
+            </a>
           )}
         </button>
       </div>
@@ -85,11 +92,11 @@ export default function Signatures(props) {
   }
 
   // Pop up the sign flow once the user has connected their wallet
-  useEffect(() => {
-    if (address) {
-      props.setIsSigning(true);
-    }
-  });
+  // useEffect(() => {
+  //   if (address) {
+  //     props.setIsSigning(true);
+  //   }
+  // });
 
   return (
     <>
@@ -149,11 +156,10 @@ export default function Signatures(props) {
         {loading && <span>loading signatures...</span>}
         {signatures && (
           <>
-            <div class='max-w-[720px] container mx-auto text-te-blue flex justify-center'>
+            <div className='max-w-[720px] container mx-auto text-te-blue flex justify-center font-light mb-8'>
               {shownSignatureCount > signatures.docs.length
                 ? signatures.docs.length
-                : shownSignatureCount < signatures.docs.length &&
-                  shownSignatureCount}{' '}
+                : shownSignatureCount}{' '}
               of {signatures.docs.length} signatures
             </div>
             {signatures.docs

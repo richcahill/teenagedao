@@ -10,8 +10,13 @@ import truncateEthAddress from 'truncate-eth-address';
 // phew that was a lot of imports, now let's get to the meat of the component
 
 export default function Sign(props) {
+  // message to sign with
+  const [userMessage, setUserMessage] = useState(
+    "Let's build a beautiful hardware wallet with teenageDAO.xyz"
+  );
+
   // state to set if the signing has worked or not
-  const [hasSigned, setHasSigned] = useState(false);
+  const [hasSignedMessage, setHasSignedMessage] = useState(false);
   // ethereum address hook
   const { address, isConnecting, isDisconnected } = useAccount();
   // ens name lookup hook
@@ -28,48 +33,29 @@ export default function Sign(props) {
     useSignMessage({
       onSuccess(signedData, variables) {
         const signedAddress = verifyMessage(variables.message, signedData);
-        setHasSigned(true);
+        setHasSignedMessage(true);
       },
     });
-
-  // message that the user is signing with
-  let defaultMessage = `Let's build a beautiful hardware wallet with teenageDAO.xyz — ${
-    data ?? truncateEthAddress(address)
-  }`;
 
   // signing function
   let signLetter = async (e) => {
     e.preventDefault();
     signMessage({
-      message: defaultMessage,
+      message: userMessage,
     });
-  };
-
-  // nicely tidy up the twitter and wagmi data before adding to the database
-  let addToList = () => {
-    props.addToSignaturesList(
-      {
-        ens: data ? data : null,
-        address: address,
-        handle: twitterUser ? twitterUser._tokenResponse.screenName : null,
-        photo: twitterUser
-          ? twitterUser.user.photoURL.replace('normal', 'bigger')
-          : null,
-      },
-      data ?? truncateEthAddress(address),
-      defaultMessage
-    );
   };
 
   // TODO you need to sort out the flow where it signs it, then adds to database and then closes the modal
 
   // jankily use an effect to see if the state for signed has updated and then add to db and close the modal
   useEffect(() => {
-    if (!hasSigned) {
+    if (!hasSignedMessage) {
       props.setIsSigning(true);
     }
 
-    if (hasSigned) {
+    // nicely tidy up the twitter and wagmi data before adding to the database
+
+    if (hasSignedMessage) {
       props.addToSignaturesList(
         {
           ens: data ? data : null,
@@ -80,7 +66,7 @@ export default function Sign(props) {
             : null,
         },
         data ?? truncateEthAddress(address),
-        defaultMessage
+        userMessage
       );
     }
   });
@@ -156,6 +142,22 @@ export default function Sign(props) {
             </div>
           )}
 
+          <div className='mt-8  border border-te-black w-96 rounded-sm relative flex'>
+            <div className='pl-4 pr-4 py-4 border-r border-te-black flex justify-center items-start w-14'>
+              <Image
+                src='/img/icons/message.svg'
+                width={16}
+                height={16}
+                alt='message icon'
+              />
+            </div>
+            <textarea
+              className='pr-4 pl-4 py-3 w-96 rounded-sm flex'
+              value={userMessage}
+              autoFocus
+              onChange={(e) => setUserMessage(e.target.value)}
+            ></textarea>
+          </div>
           <button
             onClick={signLetter}
             className='mt-16 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white  hover:opacity-90 hover:shadow-lg transition duration-300 flex justify-between'

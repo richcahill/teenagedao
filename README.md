@@ -13,14 +13,17 @@ A website to get the world hyped about building a hardware wallet together.
 [x] Async on the signing modal to stop database add before user auths signature
 [x] Truncate show more signature page
 [x] Show # of signatures
+[x] User written signature
+[x] Show user written signature
 
 
 ## In Progress
 
 
-
 ## Backlog
 [ ] Proper firebase rules
-[ ] User written signature
+[ ] Mobile styling
+[ ] Error states for wallet connect signing
+[ ] Automatically pop up signing flow
 
  
