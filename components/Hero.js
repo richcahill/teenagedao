@@ -29,7 +29,7 @@ export default function Hero(props) {
         <meta name='twitter:image' content='https://i.imgur.com/Rqxgre3.png' />
         <meta name='twitter:url' content='https://teenagedao.xyz' />
       </Head>
-      <section className='relative min-h-[75vh] flex flex-col justify-between'>
+      <section className='relative min-h-[75vh] flex flex-col justify-between overflow-hidden'>
         <Nav></Nav>
         <div
           className='absolute top-0 left-0 w-full bg-blue-500 h-full flex justify-end'
