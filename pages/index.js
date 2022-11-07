@@ -7,6 +7,7 @@ import CallToAction from '../components/CallToAction';
 import Footer from '../components/Footer';
 import Hero from '../components/Hero';
 import Sign from '../components/Sign';
+import Mockup from '../components/Mockup';
 
 import { useState, useEffect } from 'react';
 import { collection, addDoc, Timestamp } from 'firebase/firestore';
@@ -45,6 +46,8 @@ export default function Home() {
       <WhatIf />
       <Why />
       <How />
+      <Mockup />
+
       <Signatures
         setIsSigning={setIsSigning}
         setHasSigned={setHasSigned}
