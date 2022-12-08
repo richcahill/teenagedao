@@ -17,7 +17,7 @@ export default function Home() {
   const [isSigning, setIsSigning] = useState(false);
   const [hasSigned, setHasSigned] = useState(false);
 
-  let addToSignaturesList = async (info, address, signedMessage) => {
+  let addToSignaturesList = async (info, signedMessage) => {
     const payload = {
       message: signedMessage,
       info: info,
@@ -46,7 +46,7 @@ export default function Home() {
       <WhatIf />
       <Why />
       <How />
-      <Mockup />
+      {/* <Mockup /> */}
 
       <Signatures
         setIsSigning={setIsSigning}
