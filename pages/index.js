@@ -18,14 +18,12 @@ export default function Home() {
   const [hasSigned, setHasSigned] = useState(false);
 
   let addToSignaturesList = async (info, signedMessage) => {
-    console.log('here');
     const payload = {
       message: signedMessage,
       info: info,
       created: Date.now(),
     };
 
-    console.log(payload);
     const reference = await addDoc(collection(db, 'signatures'), payload);
     console.log(reference.id);
 
