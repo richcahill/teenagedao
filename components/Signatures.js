@@ -125,13 +125,11 @@ export default function Signatures(props) {
                 sign letter
               </button>
             ) : (
-              <div className='flex mt-16  justify-center space-x-4'>
-                <div className='p-4 px-6 text-te-black space-x-12  border border-te-black bg-te-grey box-border'>
+              <div className='sm:flex mt-16  justify-center space-x-4'>
+                <div className='flex justify-between p-4 px-6 text-te-black space-x-12  border border-te-black bg-te-grey box-border'>
                   <span>you've signed</span> <span>✓</span>
                 </div>
-                <div className=' flex '>
-                  <ShareToTwitterButton></ShareToTwitterButton>
-                </div>
+                <ShareToTwitterButton></ShareToTwitterButton>
               </div>
             )
           ) : (
