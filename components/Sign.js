@@ -15,6 +15,8 @@ export default function Sign(props) {
     "Let's build a beautiful hardware wallet with teenageDAO.xyz"
   );
 
+  const [hasClickedSignButton, setHasClickedSignButton] = useState(false);
+
   // state to set if the signing has worked or not
   const [hasSignedMessage, setHasSignedMessage] = useState(false);
   // ethereum address hook
@@ -31,15 +33,25 @@ export default function Sign(props) {
   // signing hooks
   const { signedData, error, signedDataIsLoading, signMessage } =
     useSignMessage({
+      onMutate(args) {
+        console.log('Mutate', args);
+      },
+      onSettled(data, error) {
+        console.log('Settled', { data, error });
+      },
       onSuccess(signedData, variables) {
         const signedAddress = verifyMessage(variables.message, signedData);
         setHasSignedMessage(true);
+      },
+      onError(error) {
+        console.log('Error', error);
       },
     });
 
   // signing function
   let signLetter = async (e) => {
     e.preventDefault();
+    setHasClickedSignButton(true);
     signMessage({
       message: userMessage,
     });
@@ -63,14 +75,13 @@ export default function Sign(props) {
             ? twitterUser.user.photoURL.replace('normal', 'bigger')
             : null,
         },
-        data ?? truncateEthAddress(address),
         userMessage
       );
     }
   });
 
   return (
-    <div className='fixed h-full w-full  top-0 left-0 z-40 flex justify-center items-center'>
+    <div className='fixed h-full w-full  top-0 left-0 z-40 flex justify-center items-center p-8'>
       <div className='fixed bg-te-black opacity-90 w-full h-full' />
       <div
         className='fixed backdrop-blur-lg w-full h-full'
@@ -158,12 +169,21 @@ export default function Sign(props) {
           </div>
           <button
             onClick={signLetter}
-            className='mt-16 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white  hover:opacity-90 hover:shadow-lg transition duration-300 flex justify-between'
+            className={`${
+              hasClickedSignButton && `opacity-20 hover:opacity-20`
+            } mt-16 lowercase font-light rounded-sm cursor-pointer bg-te-black px-4 py-3 text-white  hover:opacity-90 hover:shadow-lg transition duration-300 flex justify-between`}
           >
             {' '}
-            <span>✎</span>
-            <span>sign</span>
+            <span className={`${hasClickedSignButton && `animate-spin`}`}>
+              ✎
+            </span>
+            <span>{!hasClickedSignButton && 'sign'}</span>
           </button>
+          {hasClickedSignButton && (
+            <p className='mt-4 m-auto opacity-80 text-xs'>
+              open your wallet to sign
+            </p>
+          )}
         </form>
       </div>
     </div>
