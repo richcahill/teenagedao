@@ -18,6 +18,7 @@ import { CoinbaseWalletConnector } from 'wagmi/connectors/coinbaseWallet';
 import { InjectedConnector } from 'wagmi/connectors/injected';
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask';
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect';
+import { Analytics } from '@vercel/analytics/react';
 
 import '../public/styles/globals.css';
 
@@ -63,6 +64,7 @@ function App({ Component, pageProps }) {
     <WagmiConfig client={client}>
       <ConnectKitProvider theme='minimal'>
         <Component {...pageProps} />
+        <Analytics />
       </ConnectKitProvider>
     </WagmiConfig>
   );
