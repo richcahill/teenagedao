@@ -1,6 +1,6 @@
 # teenage dao
 
-A website to get the world hyped about building a hardware wallet together.
+A website to get the world hyped about building a hardware wallet together with Teenage Engineering
 
 
 # TODO

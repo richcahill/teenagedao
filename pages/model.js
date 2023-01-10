@@ -4,6 +4,8 @@ import { useLoader } from '@react-three/fiber';
 import { Canvas, useFrame, Suspense } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
+// optional TODO: Load a model using three.js and then use a pixel/blur filter.
+
 function Model() {
   const model = useRef();
   // Set up state for the hovered and active state
