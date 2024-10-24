@@ -3,8 +3,8 @@
 A website to get the world hyped about building a hardware wallet together with Teenage Engineering
 
 
-# TODO
-## Done
+## TODO
+### Done
 - Sign message with wagmi
 - Footer content and styling
 - Ensure users can't sign twice with the same wallet
@@ -17,10 +17,10 @@ A website to get the world hyped about building a hardware wallet together with 
 - Show user written signature
 
 
-## In Progress
+### In Progress
 
 
-## Backlog
+### Backlog
 - Proper firebase rules
 - Mobile styling
 - Error states for wallet connect signing
